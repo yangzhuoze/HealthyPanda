@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,4 +121,77 @@
     <h3>EatVitality</h3>
     <div id="pie1" class="graph" ></div>
     <hr>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+    <!-- ECharts准一具大小（高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+    <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.js"></script>  
+    <script type="text/javascript">
+    // 基于准好的dom，初始化echarts表
+    var myChart = echarts.init(document.getElementById('main')); 
+    var params = {};
+    var foodConfidence = [];
+    $.ajax({
+        url: "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/tag?" + $.param(params),
+        beforeSend: function(xhrObj){
+            // Request headers
+            xhrObj.setRequestHeader("Content-Type","application/json");
+            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","88038fa87ee74b969e9575dc4b5d1125");
+        },
+        type: "POST",
+        // Request body
+         data: "{'url':'https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg'}",
+         //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg
+         //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0603.jpg
+         //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0598.jpg
+    })
+    .done(function(data) {
+
+        var tags = data.tags;
+        var retTags = [];
+        var data = [];
+        for (var i = 0; i < tags.length; i++) {  
+                var tag = tags[i];
+                var item = {};
+                item.name = tag.name;
+                item.value = tag.confidence;
+                foodConfidence.push(item);
+            }  
+        var option = {
+            title : {
+                text: 'Eatality',
+                x:'left'
+            },
+            //tooltip : {
+            //    trigger: 'item',
+            //    formatter: "{a} <br/>{b} : {c} ({d}%)"
+            //},
+            toolbox: {
+                show : false
+            },
+            calculable : true,
+            series : [
+                {
+                    name:'Pie',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data: foodConfidence
+                }
+            ]
+        };
+        // echarts象加据 
+        myChart.setOption(option); 
+    })
+    </script>
+</body>
+>>>>>>> b5780b50ca0b7be1247a48c01d0946d3b97f049e
 </html>
