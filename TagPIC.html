@@ -36,7 +36,7 @@
             },
             type: "POST",
             // Request body
-             data: "{'url':'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHqVGATI8qHgsU3uYeKcyzViDOIot0BMk_a9onVEDk_bLUEaXCTw'}",
+             data: "{'url':'//https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg'}",
              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6638.JPG
              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6639.JPG
              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6633.JPG
@@ -91,6 +91,28 @@
             alert("error");
         });
     });
+
+    function handleTags(data) {
+        var result = {};
+
+        var tag = {};
+        for (var i = 0; i < data.tags.length; i ++) {
+            tag[data[i].name] = data[i].confidence;
+        }
+
+        if (tag.food < 0.7 && !data.categories[0].name.startsWith('food_')) {
+            result['report'] = 'Please input food picture.'
+            result['code'] = 1
+        } else {
+            result['report'] = checkHealthyRate(tag)
+            result['code'] = 0
+        }
+    }
+
+    function checkHealthyRate(data) {
+        // TODO check food healthy rate
+        return ''
+    }
 </script>
 </body>
 
