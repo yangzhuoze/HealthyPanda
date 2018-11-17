@@ -12,23 +12,23 @@ This repository for AIA LifeHack 2018 #AIA Hackathon team 09 - *Healthy Panda*
 
 **Step 1:  Main Page**
 
-![Prototype 1](images/mainpage.png)
+![Prototype 1](prototype/mainpage.png)
 
 **Step 2:  Profile Page**
 
-![Prototype 2](images/profilepage.png)
+![Prototype 2](prototype/profilepage.png)
 
 **Step 3: Photo Taking**
 
-![Prototype 3](images/phototaking.png)
+![Prototype 3](prototype/phototaking.png)
 
 **Step 4: Content Filter**
 
-![Prototype 4](images/contentfilter.png)
+![Prototype 4](prototype/contentfilter.png)
 
 **Step 5: Result Page**
 
-![Prototype 5](images/result.png)
+![Prototype 5](prototype/result.png)
 
 ## Used tools
 - [JQuery](http://jquery.com/) - For FE UI
