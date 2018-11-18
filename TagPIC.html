@@ -1,197 +1,101 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
-<html>
-<head>
-    <title>JSSample</title>
+ <html>
+ <head>
+     <title>JSSample</title>
 
 
 
-    <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.flot.pie.js"></script>
-</head>
-<body>
+     <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.js"></script>
+     <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.flot.js"></script>
+     <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.flot.pie.js"></script>
+ </head>
+ <body>
 
-    <style>
-    div.graph
-            {
-                width: 400px;
-                height: 300px;
-                border: 1px dashed gainsboro;
-            }
+     <style>
+     div.graph
+             {
+                 width: 400px;
+                 height: 300px;
+                 border: 1px dashed gainsboro;
+             }
 
-    </style>
+     </style>
 
-<script type="text/javascript">
-    $(function() {
-        var params = {
-            // Request parameters
-        };
+ <script type="text/javascript">
+     $(function() {
+         var params = {
+             // Request parameters
+         };
 
-        $.ajax({
-            url: "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/tag?" + $.param(params),
-            beforeSend: function(xhrObj){
-                // Request headers
-                xhrObj.setRequestHeader("Content-Type","application/json");
-                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","88038fa87ee74b969e9575dc4b5d1125");
-            },
-            type: "POST",
-            // Request body
-             data: "{'url':'//https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg'}",
-             //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6638.JPG
-             //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6639.JPG
-             //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6633.JPG
-             //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg
-             //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0603.jpg
-             //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0598.jpg
-        })
-        .done(function(data) {
+         $.ajax({
+             url: "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/tag?" + $.param(params),
+             beforeSend: function(xhrObj){
+                 // Request headers
+                 xhrObj.setRequestHeader("Content-Type","application/json");
+                 xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","88038fa87ee74b969e9575dc4b5d1125");
+             },
+             type: "POST",
+             // Request body
+              data: "{'url':'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHqVGATI8qHgsU3uYeKcyzViDOIot0BMk_a9onVEDk_bLUEaXCTw'}",
+              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6638.JPG
+              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6639.JPG
+              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_6633.JPG
+              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg
+              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0603.jpg
+              //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0598.jpg
+         })
+         .done(function(data) {
 
-        var tags = data.tags;
-        var retTags = [];
-        var data = [];
-        for (var i = 0; i < tags.length; i++) {
-                var tag = tags[i];
-                var item = {};
-                if(tag.name != "container"){
-                    item.label = tag.name;
-                    item.data = tag.confidence;
-                    data.push(item);
-                }
-            }
+         var tags = data.tags;
+         var retTags = [];
+         var data = [];
+         for (var i = 0; i < tags.length; i++) {
+                 var tag = tags[i];
+                 var item = {};
+                 if(tag.name != "container"){
+                     item.label = tag.name;
+                     item.data = tag.confidence;
+                     data.push(item);
+                 }
+             }
 
-       /* var data = [
-                { label: "苹果",  data: 10},
-                { label: "香蕉",  data: 30},
-                { label: "西瓜",  data: 90},
-                { label: "葡萄",  data: 70},
-                { label: "柑橘",  data: 80},
-                { label: "菠萝",  data: 110}
-            ]; */
+        /* var data = [
+                 { label: "苹果",  data: 10},
+                 { label: "香蕉",  data: 30},
+                 { label: "西瓜",  data: 90},
+                 { label: "葡萄",  data: 70},
+                 { label: "柑橘",  data: 80},
+                 { label: "菠萝",  data: 110}
+             ]; */
 
-        $.plot($("#pie1"), data, {
-                series: {
-                    pie: {
-                           show: true //显示饼图
-                        }
-                },
-                legend: {
-                    show: true//不显示图例
-                }
-            });
+         $.plot($("#pie1"), data, {
+                 series: {
+                     pie: {
+                            show: true //显示饼图
+                         }
+                 },
+                 legend: {
+                     show: true//不显示图例
+                 }
+             });
 
-        //alert(retTags.toString());
-        //var arr = retTags.join('&');　　//arr是以&分割的字符串
-       // alert(arr);
-         //$("#retText").val(arr);
+         //alert(retTags.toString());
+         //var arr = retTags.join('&');　　//arr是以&分割的字符串
+        // alert(arr);
+          //$("#retText").val(arr);
 
-            //console.log(retTags);
-            //alert(data.tags);
-        })
-        .fail(function() {
-            alert("error");
-        });
-    });
-
-    function handleTags(data) {
-        var result = {};
-
-        var tag = {};
-        for (var i = 0; i < data.tags.length; i ++) {
-            tag[data[i].name] = data[i].confidence;
-        }
-
-        if (tag.food < 0.7 && !data.categories[0].name.startsWith('food_')) {
-            result['report'] = 'Please input food picture.'
-            result['code'] = 1
-        } else {
-            result['report'] = checkHealthyRate(tag)
-            result['code'] = 0
-        }
-    }
-
-    function checkHealthyRate(data) {
-        // TODO check food healthy rate
-        return ''
-    }
-</script>
-</body>
+             //console.log(retTags);
+             //alert(data.tags);
+         })
+         .fail(function() {
+             alert("error");
+         });
+     });
+ </script>
+ </body>
 
 
-    <h3>EatVitality</h3>
-    <div id="pie1" class="graph" ></div>
-    <hr>
-=======
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>ECharts</title>
-</head>
-<body>
-    <!-- ECharts��@��j�p�]���^��Dom -->
-    <div id="main" style="height:400px"></div>
-    <!-- ECharts���ޤJ -->
-    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
-    <script language="javascript" type="text/javascript" src="http://www.flotcharts.org/flot/jquery.js"></script>  
-    <script type="text/javascript">
-    // ��_��n��dom�A��l��echarts��
-    var myChart = echarts.init(document.getElementById('main')); 
-    var params = {};
-    var foodConfidence = [];
-    $.ajax({
-        url: "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/tag?" + $.param(params),
-        beforeSend: function(xhrObj){
-            // Request headers
-            xhrObj.setRequestHeader("Content-Type","application/json");
-            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","88038fa87ee74b969e9575dc4b5d1125");
-        },
-        type: "POST",
-        // Request body
-         data: "{'url':'https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg'}",
-         //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0599.jpg
-         //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0603.jpg
-         //https://s3-ap-northeast-1.amazonaws.com/aiahk-video-tokyo/ESCG/IMG_0598.jpg
-    })
-    .done(function(data) {
-
-        var tags = data.tags;
-        var retTags = [];
-        var data = [];
-        for (var i = 0; i < tags.length; i++) {  
-                var tag = tags[i];
-                var item = {};
-                item.name = tag.name;
-                item.value = tag.confidence;
-                foodConfidence.push(item);
-            }  
-        var option = {
-            title : {
-                text: 'Eatality',
-                x:'left'
-            },
-            //tooltip : {
-            //    trigger: 'item',
-            //    formatter: "{a} <br/>{b} : {c} ({d}%)"
-            //},
-            toolbox: {
-                show : false
-            },
-            calculable : true,
-            series : [
-                {
-                    name:'Pie',
-                    type:'pie',
-                    radius : '55%',
-                    center: ['50%', '60%'],
-                    data: foodConfidence
-                }
-            ]
-        };
-        // echarts�H�[�u 
-        myChart.setOption(option); 
-    })
-    </script>
-</body>
->>>>>>> b5780b50ca0b7be1247a48c01d0946d3b97f049e
-</html>
+     <h3>EatVitality</h3>
+     <div id="pie1" class="graph" ></div>
+     <hr>
+ </html>
