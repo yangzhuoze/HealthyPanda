@@ -1,5 +1,3 @@
 ### Prototype
 
-Prototype UI
-
-![Team pic](img/panda.jpg)
+Prototype UI screenshot
