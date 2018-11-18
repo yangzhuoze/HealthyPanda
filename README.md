@@ -1,4 +1,4 @@
-This repository for AIA LifeHack 2018 #AIA Hackathon team 09 - *Healthy Panda*
+This repository for AIA LifeHack 2018 #AIA Hackathon team 09 - **Healthy Panda**
 
 ## Team members
 - Samuel Cheung (Business Expert from HK PD)
@@ -32,5 +32,5 @@ This repository for AIA LifeHack 2018 #AIA Hackathon team 09 - *Healthy Panda*
 
 ## Used tools
 - [JQuery](http://jquery.com/) - For FE UI
-- [Cognitive Services] - For Analyze Image 
-- [AWS S3] - For Simple Object Store 
+- [Cognitive Services] - For Analyze Image
+- [AWS S3] - For Simple Object Store
