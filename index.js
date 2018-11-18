@@ -42,6 +42,11 @@ app.post('/users', function (req, res) {
     // TODO persist into DB.
 })
 
+app.get('/engine', function (req, res) {
+    // should start a thread to run the analyse engine
+    userAnalyseEngine(req.params.userId)
+})
+
 var scanUserSocialMedia = function (req, res) {
     const request = require('request');
     const fs = require('fs');
@@ -49,9 +54,22 @@ var scanUserSocialMedia = function (req, res) {
     // Access user public profile usign agent's authenticated token
     var token = req.params.token
     var userId = req.params.userId
+
+    var user = {}
     var dir = ''
+    var dbUser = findUserByUserId(userId)
+    if (dbUser !== undefined) {
+        user = dbUser
+    }
+
     if (source == 'Wechat') {
-        // Scan wechat user's circle picture
+        request(`http://api.wechat.com/users/${userId}/detail`, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                user.push(data)
+            }
+        });
+
+        // Scan wechat user's public circle picture
         // get post list
         var posts = []
         request(`http://api.wechat.com/users/${userId}/circles`, function (error, response, body) {
@@ -64,6 +82,7 @@ var scanUserSocialMedia = function (req, res) {
             }
         });
 
+        // for analysing in later step
         if (posts !== undefined || posts.length === 0) {
             for (post in posts) {
                 request(`http://api.wechat.com/users/${userId}/circles/${post.id}`, function (error, response, body) {
@@ -81,6 +100,34 @@ var scanUserSocialMedia = function (req, res) {
     } else if (source == 'Linkedin') {
         // TODO Retrieve user info from Linkedin
     }
+    saveUser(users)
+}
+
+// ORM
+var findUserByUserId = function (userId) {
+    const conn = getConnection()
+    var user = conn.query(`SELECT * FROM TUser WHERE UserId = ${userId}`)
+    return user
+}
+
+var saveUser(user) {
+    // TODO
+}
+
+var getConnection = function () {
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'panda001',
+        password : 'pandawithhealthydiet',
+        database : 'HPDEV'
+    });
+
+    connection.connect()
+}
+
+var userAnalyseEngine = function (userId) {
+    // analyse the user with the retrieved photo
+
 }
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
