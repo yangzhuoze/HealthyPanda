@@ -1,0 +1,38 @@
+{
+    "user": [
+        {
+            "FirstName": "Michael",
+            "LastName": "Lee",
+            "NationalId": "4401061144011",
+            "BankAccount": [
+                {
+                    "AccountNo": "62222901851901",
+                    "Code": "0387"
+                }
+            ]
+            ,
+            "Address": [
+                {
+                    "Address": "Causeway Hong Kong",
+                    "MailCode": "044",
+                    "Type": "Office"
+                },
+                {
+                    "Address": "Kowlong Hong Kong",
+                    "MailCode": "056",
+                    "Type": "Home"
+                }
+            ],
+            "Phone": [
+                {
+                    "PhoneNo": "085-11425866",
+                    "Type": "Mobile"
+                },
+                {
+                    "PhoneNo": "085-29467933",
+                    "Type": "Office"
+                }
+            ]
+        }
+    ]
+}
